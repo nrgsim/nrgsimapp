@@ -1,0 +1,12 @@
+{
+  "error": {
+    "loginFailed": "Login failed. Please try again."
+  },
+  "message": {
+    "loginSucceeded": "Login succeeded.",
+    "logoutSucceeded": "Logout succeeded.",
+    "userCreated": "User created.",
+    "userUpdated": "User updated."
+  }
+}  
+ 

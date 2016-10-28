@@ -1,0 +1,278 @@
+<header class="main_header" id="main_header_id">
+  <div class="help">
+    <a id="show-help" href="#">About</a>
+  </div>  
+  <div class="temporal"> 
+		View Day 
+    <div class="temporal-group">   
+      <div>    
+        <div id="day-of-year-slider"></div>    
+      </div>   
+      <div id="day-of-year-sliderDisp">&nbsp;</div>   
+    </div> 
+		View Hour   
+    <div class="temporal-group">  
+      <div>    
+        <div id="hour-of-day-slider"></div>    
+      </div>   
+      <div id="hour-of-day-sliderDisp">&nbsp;</div>    
+    </div> 
+  </div>  
+  <div class="profile">
+    <a href="/#logout"><%= $.i18n('sim-logout') %></a>
+		<a href="/#profile"><%= $.i18n('sim-profile') %></a>
+  </div>
+</header>
+
+<div id="content-wrapper">
+	<div id="content">
+		<div id="inputs-panel" class="panel">
+			<div>
+        <div>
+          <div id="left-panel-toggle">&nbsp;</div>
+        </div>
+      </div>
+      <div class="panel-content">
+        <div id="input-tabs">
+          <ul>
+            <li><a href="#input-wrapper-location"><%= $.i18n('sim-location') %></a></li>
+            <li><a href="#input-wrapper-activity"><%= $.i18n('sim-activity') %></a></li>
+            <li><a href="#input-wrapper-hvac"><%= $.i18n('sim-hvac') %></a></li>
+            <!-- <li><a href="#input-wrapper-building"><%= $.i18n('sim-building') %></a></li> -->
+            <li><a href="#input-wrapper-walls"><%= $.i18n('sim-walls') %></a></li>
+            <li><a href="#input-wrapper-roof"><%= $.i18n('sim-roof') %></a></li>
+            <li><a href="#input-wrapper-geometry"><%= $.i18n('sim-geometry') %></a></li>
+					</ul>
+
+					<div id="input-wrapper-location" class="input-weather-panel" style="display:none">
+						<div class="control">
+							<label>WMO Region</label>
+							<select id="continent">
+								<option value="WMO_1_Africa">Africa</option>
+								<option value="WMO_2_Asia">Asia</option>
+								<option value="WMO_3_South_America">South America</option>
+								<option value="WMO_4_North_And_Central_America">North and Central America</option>
+								<option value="WMO_5_Southwest_Pacific">Southwest Pacific</option>
+								<option value="WMO_6_Europe">Europe</option>
+							</select>
+						</div>
+						<div class="control">
+							<label>Country</label>
+							<select id="country" disabled="disabled"></select>
+						</div>
+						<div class="control">
+							<label>Weather File</label>
+							<select id="WeatherFile" disabled="disabled"></select>
+						</div>
+					</div>  <!-- end location -->
+
+					<div id="input-wrapper-activity" class="input-wrapper-section" style="display:none">
+						<label><%= $.i18n('sim-occupancy-type') %> <span id="occupency-typeDisp"></span></label>
+						<select id="occupancy-type">
+							<option value="Office"><%= $.i18n('sim-office') %></option>
+							<option value="Office"><%= $.i18n('sim-office') %></option>
+							<option value="Classroom'"><%= $.i18n('sim-classroom') %></option>
+							<option value="Residential"><%= $.i18n('sim-residential') %></option>
+							<option value="Commercial"><%= $.i18n('sim-commercial') %></option>
+							<option value="ConventionCenter"><%= $.i18n('sim-conventionCenter') %></option>
+							<option value="Financial"><%= $.i18n('sim-financial') %></option>
+							<option value="Industrial"><%= $.i18n('sim-industrial') %></option>
+							<option value="Auditorium"><%= $.i18n('sim-auditorium') %></option>
+							<option value="Grocery"><%= $.i18n('sim-grocery') %></option>
+							<option value="Clinic"><%= $.i18n('sim-clinic') %></option>
+							<option value="Worship"><%= $.i18n('sim-worship') %></option>
+							<option value="Restaurant"><%= $.i18n('sim-restaurant') %></option>
+							<option value="UnknownOccupancy"><%= $.i18n('sim-unknownoccupancy') %></option>
+						</select>
+						<div class="control">
+							<label><%= $.i18n('Cooling Setpoint') %> <span id="CoolingSPDisp"></span></label>
+							<div id="CoolingSP">&nbsp;</div>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('Heating Setpoint') %> <span id="HeatingSPDisp"></span></label>
+							<div id="HeatingSP">&nbsp;</div>
+						</div>
+					</div> <!-- end activity -->
+
+					<div id="input-wrapper-geometry" class="input-wrapper-section" style="display:none">
+						<div class="control">
+							<label><%= $.i18n('sim-building-height') %> <span id="HeightDisp"></span></label>
+							<div id="Height"></div>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('sim-building-depth') %> <span id="DepthDisp"></span></label>
+							<div id="Depth"></div>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('sim-building-width') %> <span id="WidthDisp"></span></label>
+							<div id="Width"></div>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('sim-orientation') %> <span id="orientationDisp"></span></label>
+							<div id="orientation"></div>
+						</div> 
+					</div> 
+
+
+					<div id="input-wrapper-hvac" class="input-wrapper-section" style="display:none">
+					
+					</div> <!-- end hvac-->
+				
+					<div id="input-wrapper-walls" class="input-wrapper-section" style="display:none">
+						<div class="control">
+							<label>Wall Construction Type</label>
+							<select id="construction-type">
+								<option value="SteelFramed">Steel Framed</option>
+								<option value="Mass">Mass</option>
+								<option value="Metal-Building">Metal Building</option>
+								<option value="Wood-Framed-and-Other">Wood Framed And Other</option>
+							</select>
+						</div>
+						<div class="control">
+							<label>Window Construction Type</label>
+							<select id="window-type">
+								<option value="GenericWindow">Generic Window</option>
+								<option value="SinglePane">Single Pane</option>
+								<option value="DoublePane">Double Pane</option>
+								<option value="DoublePaneTinted">Double Pane Tinted</option>
+								<option value="DoublePaneLowE">Double Pane LowE</option>
+								<option value="TripplePane">Tripple Pane</option>
+								<option value="TripplePaneTinted">Tripple Pane Tinted</option>
+								<option value="TripplePaneLowE">Tripple Pane LowE</option>
+							</select>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('sim-glaze-ratio') %> <span id="WinGRDisp"></span></label>
+							<div id="WinGR"></div>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('sim-overhang') %> <span id="WinOverhangRDisp"></span></label>
+							<div id="WinOverhangR"></div>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('sim-Lfin') %> <span id="LWinFinRDisp"></span></label>
+							<div id="LWinFinR"></div>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('sim-Rfin') %> <span id="RWinFinRDisp"></span></label>
+							<div id="RWinFinR"></div>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('sim-infiltration') %> <span id="infiltration-rateDisp"></span></label>
+							<div id="infiltration-rate"></div>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('Insulation R-Value') %> <span id="insulation-levelDisp"></span></label>
+							<div id="insulation-level"></div>
+						</div>
+
+						<div class="control">
+							<label>PCM Coverage: <span id="mvalueDisp"></span>&#37;</label>
+							<div id="mvalue"></div> 
+						</div> 
+						<div class="control">
+							<label>PCM Peak Transition [Degree&ndash;C°]: C<span id="qvalueDisp"></span></label>
+							<div id="qvalue"></div>
+						</div>
+					</div> <!-- end walls -->
+
+					<div id="input-wrapper-roof" class="input-wrapper-section" style="display:none">
+						<div class="control">
+							<label>Roof Construction Type</label>
+							<select id="roof-type">
+								<option value="SteelFramed">Insulation Entirely Above Deck</option>
+								<option value="Metal-Building">Metal Building</option>
+								<option value="Attic-And-Other">Attic And Other</option>
+							</select>
+						</div>
+						<div class="control">
+							<label><%= $.i18n('Insulation R-Value') %> <span id="roof-insulation-levelDisp"></span></label>
+							<div id="roof-insulation-level"></div>
+						</div>
+						<div class="control">
+							<label>PCM Coverage: <span id="rmvalueDisp"></span>&#37;</label>
+							<div id="rmvalue"></div> 
+						</div> 
+						<div class="control">
+							<label>PCM Peak Transition [Degree&ndash;C°]: C<span id="rqvalueDisp"></span></label>
+							<div id="rqvalue"></div>
+						</div>				
+					</div> <!-- end roof-->
+
+				</div> <!-- end input-tabls -->
+			</div> <!-- end panel-content -->
+		</div> <!-- end inputs-panel -->
+<!--</div> <!-- end content -->
+<!--</div> <!-- end content-wrapper-->
+
+<div id="canvas"></div>
+
+<div id="results-panel" class="panel">
+	<div class="panel-content">
+<!--		
+		<div class="control half">
+			<label>PCM<br/>Coverage</br/><span id="mvalueDisp"></span>&#37;</label>
+			<div id="mvalue"></div> 
+		</div> 
+		<div class="control half">
+			<label>PCM Peak Transition<br/>[Degree&ndash;C°]</br/>C<span id="qvalueDisp"></span></label>
+			<div id="qvalue"></div>
+		</div>
+		<div class="simulation-controls">
+			<div class="control">
+				<button id="run-button"><%= $.i18n('sim-simulate') %></button>
+			</div>
+			<div class="control">
+				<div id="progressbar" style="display:none"></div>
+			</div>
+		</div>
+-->
+		<div id="results" style="display:none">  
+			<div id="results">
+				<table>    
+					<tbody>    
+						<tr>   
+							<th>&nbsp</th>   
+							<th>Heating Energy Demand [kWh]</th>   
+							<th>Cooling Energy Demand [kWh]</th>   
+						</tr>    
+						<tr>   
+							<td>NoPCM</td>   
+							<td id="heat-nopcm"></td>    
+							<td id="cool-nopcm"></td>    
+						</tr>    
+						<tr>   
+							<td>BioPCM</td>    
+							<td id="heat-biopcm"></td>   
+							<td id="cool-biopcm"></td>   
+						</tr>    
+						<tr>   
+							<td>Savings</td>   
+							<td id="heat-savings"></td>    
+							<td id="cool-savings"></td>    
+							<td id="heat-percent-savings"></td>    
+							<td id="cool-percent-savings"></td>    
+						</tr>    
+					</tbody>   
+				</table>
+			</div>
+		</div>
+
+	</div> <!-- end panel content -->
+</div> <!-- end results panel -->
+
+<div id="help-dialog" title="About">
+  <p>Facade is an energy model aided design tool for harvesting cooling energy from the air and heating energy from the sun by utalizeing phase change materials for thermal energy storage in external wall applacations.  
+
+  <p>1) Site: Choose weather file and micro climate conditions.</p>
+
+   <p>2) Geometry: Choose the geometric elements of the wall system and adjacent zone including the wall width, ceiling height, zone depth, window to wall ratio and window shading systems.</p> 
+
+  <p>3) Facade: Choose the wall; type, insulaiton R-Value and the window construction type</p> 
+
+  <p>4) Activity: Choose the the activity (block of people, lighting, and equipment loads and schedules) and the thermostatic setpoints. </p>
+
+  <p>5) Phase Change Material Properties: Choose BioPCM M-Value and Q-Value. </p>
+
+  <p>6) Simulate: Run the model!</p>
+</div> <!-- end help dialog -->

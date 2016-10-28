@@ -1,0 +1,87 @@
+
+#left-panel-toggle {
+  float: right;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.panel {
+  .panel-content {
+    display: table;
+    width: 100%;
+
+    select {
+      color: @black;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    h3 {
+      margin: 4px 0; 
+    }
+
+    .weather-panel {
+      border: 1px solid #B6B6B6;
+      padding-bottom: 10px;
+    }
+
+    .control {
+      margin-left: 5px;
+      margin-right: 5px;
+
+      label {
+        color: #4F4F4F;
+      }
+
+      &.half {
+        display: inline-block;
+        width: 40%;
+        text-align: center;
+
+        .ui-slider-vertical {
+          margin-left: 40%;
+        }
+      }
+    }
+
+    .simulation-controls {
+      .control {
+				float: right;
+				margin-right: 50px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+      }
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 3px;
+    }
+
+  }
+}
+
+
+.input-menu {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+input {
+  color: #000;
+}
+
+#results {
+  table {
+    border: 1px solid #000;
+  }
+  th, td {
+
+    &:first-child {
+      white-space: nowrap;
+    }
+    padding: 4px;
+    border: 1px solid #000;
+  }
+}

@@ -1,0 +1,14 @@
+<h2><%= $.i18n('home-title') %></h2>
+<p><%= $.i18n('home-description') %></p>
+<div>
+  <a href="/#login"><%= $.i18n('home-login') %></a>
+</div>
+<div>
+  <a href="/#logout"><%= $.i18n('home-logout') %></a>
+</div>
+<div>
+  <a href="/#signup"><%= $.i18n('home-signup') %></a>
+</div>
+<div>
+  <a href="/#sim"><%= $.i18n('home-simulation') %></a>
+</div>

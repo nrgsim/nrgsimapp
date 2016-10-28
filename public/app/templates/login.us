@@ -1,0 +1,18 @@
+<h3><%= $.i18n('login-title') %></h3>
+<div>
+  <%= $.i18n('login-email') %> <input id="email"/>
+</div>
+<div>
+  <%= $.i18n('login-password') %> <input id="password" type="password"/>
+</div>
+<div class="messages">
+</div>
+<div>
+  <button id="login"><%= $.i18n('login-login') %></button>
+</div>
+<div>
+  <a href="/#signup"><%= $.i18n('login-register') %></a>
+</div>
+<div>
+  <a href="#" id="forgot-password"><%= $.i18n('login-forgotpwd') %></a>
+</div>
