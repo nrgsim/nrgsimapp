@@ -2,6 +2,7 @@ var ExtWindow=[];
 var ExtShade=[];
 var leftShade=[];
 var rightShade=[];
+var wallcount=4;
 
 window.app.views.SimPage = Backbone.View.extend({
 
@@ -293,7 +294,6 @@ sz2=str(CDbl(BuildingHeight)-windowheadersize-Extwh)
     this.scene.add(ExtWindow[i]);
 */
     var windowtowall=Math.sqrt(40/100);
-    var wallcount=4;
 		var i;
 		var ExtWindowGeometry;
 		var ExtWindowMaterial;
@@ -584,7 +584,7 @@ sz2=str(CDbl(BuildingHeight)-windowheadersize-Extwh)
     
     
 //could we remove the checkbox for window with an "if WinGR>1 then yes" statement? 
-    $("#WinGR").slider({ min: 0, max: 99, value: 40, slide: self.handleGlazingRatioChange });
+    $("#WinGR").slider({ min: 1, max: 99, value: 40, slide: self.handleGlazingRatioChange });
     $("#insulation-level").slider({ min: 0.1, max: 10, value: 3, slide: self.updateSliderDisplay });
     $("#roof-insulation-level").slider({ min: 0.1, max: 10, value: 3, slide: self.updateSliderDisplay });
     $("#Window_U_Value").slider({ min: 1.94, max: 5.8, value: 3.12, step: 0.1, slide: self.updateSliderDisplay });
@@ -675,32 +675,111 @@ sz2=str(CDbl(BuildingHeight)-windowheadersize-Extwh)
     this.updateSliderDisplay(evt, ui);
     var enable = ui.value > 1;
     var windowtowall= Math.sqrt(ui.value/100);
-    var i=1;
+    var i;
 		
-	//	for(i=0;i<wallcount;i++){
-			ratioShade=ExtShade[i].scale.y/ExtWindow[i].scale.z;
-			ratioFin=leftShade[i].scale.y/ExtWindow[i].scale.x;
+		for(i=0;i<wallcount;i++){
+			switch(i){	
+				case 0:
+					ratioShade=ExtShade[i].scale.y/ExtWindow[i].scale.z;
+					ratioFin=leftShade[i].scale.y/ExtWindow[i].scale.x;
 
-			ExtWindow[i].scale.x = (windowtowall)*(this.solarCube.scale.x);
-			ExtWindow[i].scale.z = (windowtowall)*(this.solarCube.scale.z);
+					ExtWindow[i].scale.x = (windowtowall)*(this.solarCube.scale.x);
+					ExtWindow[i].scale.z = (windowtowall)*(this.solarCube.scale.z);
 
-			ExtShade[i].scale.x = ExtWindow[i].scale.x;
-			ExtShade[i].scale.y= ratioShade*ExtWindow[i].scale.z;
-			ExtShade[i].position.y = -this.solarCube.scale.y/2-(ExtShade[i].scale.y/2);
-			ExtShade[i].position.z = ExtWindow[i].scale.z/2+this.solarCube.scale.z/2;
+					ExtShade[i].scale.x = ExtWindow[i].scale.x;
+					ExtShade[i].scale.y= ratioShade*ExtWindow[i].scale.z;
+					ExtShade[i].position.y = this.solarCube.scale.y/2+(ExtShade[i].scale.y/2);
+					ExtShade[i].position.z = ExtWindow[i].scale.z/2+this.solarCube.scale.z/2;
 
-			leftShade[i].scale.y = ratioFin*ExtWindow[i].scale.x;
-			leftShade[i].scale.z = ExtWindow[i].scale.z;
-			leftShade[i].position.x = -(ExtWindow[i].scale.x/2);
-			leftShade[i].position.y = -this.solarCube.scale.y/2-(leftShade[i].scale.y/2);
-			leftShade[i].position.z = ExtWindow[i].position.z;
+					leftShade[i].scale.y = ratioFin*ExtWindow[i].scale.x;
+					leftShade[i].scale.z = ExtWindow[i].scale.z;
+					leftShade[i].position.x = (ExtWindow[i].scale.x/2);
+					leftShade[i].position.y = this.solarCube.scale.y/2+(leftShade[i].scale.y/2);
+					leftShade[i].position.z = ExtWindow[i].position.z;
 
-			rightShade[i].scale.y = ratioFin*ExtWindow[i].scale.x;
-			rightShade[i].scale.z = ExtWindow[i].scale.z;
-			rightShade[i].position.x = (ExtWindow[i].scale.x/2);
-			rightShade[i].position.y = -this.solarCube.scale.y/2-(rightShade[i].scale.y/2);
-			rightShade[i].position.z = ExtWindow[i].position.z;
-  //	}
+					rightShade[i].scale.y = ratioFin*ExtWindow[i].scale.x;
+					rightShade[i].scale.z = ExtWindow[i].scale.z;
+					rightShade[i].position.x = -(ExtWindow[i].scale.x/2);
+					rightShade[i].position.y = this.solarCube.scale.y/2+(rightShade[i].scale.y/2);
+					rightShade[i].position.z = ExtWindow[i].position.z;
+					break;
+				case 1:
+					ratioShade=ExtShade[i].scale.y/ExtWindow[i].scale.z;
+					ratioFin=leftShade[i].scale.y/ExtWindow[i].scale.x;
+
+					ExtWindow[i].scale.x = (windowtowall)*(this.solarCube.scale.x);
+					ExtWindow[i].scale.z = (windowtowall)*(this.solarCube.scale.z);
+
+					ExtShade[i].scale.x = ExtWindow[i].scale.x;
+					ExtShade[i].scale.y= ratioShade*ExtWindow[i].scale.z;
+					ExtShade[i].position.y = -this.solarCube.scale.y/2-(ExtShade[i].scale.y/2);
+					ExtShade[i].position.z = ExtWindow[i].scale.z/2+this.solarCube.scale.z/2;
+
+					leftShade[i].scale.y = ratioFin*ExtWindow[i].scale.x;
+					leftShade[i].scale.z = ExtWindow[i].scale.z;
+					leftShade[i].position.x = -(ExtWindow[i].scale.x/2);
+					leftShade[i].position.y = -this.solarCube.scale.y/2-(leftShade[i].scale.y/2);
+					leftShade[i].position.z = ExtWindow[i].position.z;
+
+					rightShade[i].scale.y = ratioFin*ExtWindow[i].scale.x;
+					rightShade[i].scale.z = ExtWindow[i].scale.z;
+					rightShade[i].position.x = (ExtWindow[i].scale.x/2);
+					rightShade[i].position.y = -this.solarCube.scale.y/2-(rightShade[i].scale.y/2);
+					rightShade[i].position.z = ExtWindow[i].position.z;
+					break;
+				case 2:
+					ratioShade=ExtShade[i].scale.x/ExtWindow[i].scale.z;
+					ratioFin=leftShade[i].scale.x/ExtWindow[i].scale.y;
+
+					ExtWindow[i].scale.y = (windowtowall)*(this.solarCube.scale.y);
+					ExtWindow[i].scale.z = (windowtowall)*(this.solarCube.scale.z);
+
+					ExtShade[i].scale.y = ExtWindow[i].scale.y;
+					ExtShade[i].scale.x= ratioShade*ExtWindow[i].scale.z;
+					ExtShade[i].position.x = this.solarCube.scale.x/2+(ExtShade[i].scale.x/2);
+					ExtShade[i].position.z = ExtWindow[i].scale.z/2+this.solarCube.scale.z/2;
+
+					leftShade[i].scale.x = ratioFin*ExtWindow[i].scale.y;
+					leftShade[i].scale.z = ExtWindow[i].scale.z;
+					leftShade[i].position.y = (ExtWindow[i].scale.y/2);
+					leftShade[i].position.x = this.solarCube.scale.x/2+(leftShade[i].scale.x/2);
+					leftShade[i].position.z = ExtWindow[i].position.z;
+
+					rightShade[i].scale.x = ratioFin*ExtWindow[i].scale.y;
+					rightShade[i].scale.z = ExtWindow[i].scale.z;
+					rightShade[i].position.y = -(ExtWindow[i].scale.y/2);
+					rightShade[i].position.x = this.solarCube.scale.x/2+(rightShade[i].scale.x/2);
+					rightShade[i].position.z = ExtWindow[i].position.z;
+					break;
+				case 3:
+					ratioShade=ExtShade[i].scale.x/ExtWindow[i].scale.z;
+					ratioFin=leftShade[i].scale.x/ExtWindow[i].scale.y;
+
+					ExtWindow[i].scale.y = (windowtowall)*(this.solarCube.scale.y);
+					ExtWindow[i].scale.z = (windowtowall)*(this.solarCube.scale.z);
+
+					ExtShade[i].scale.y = ExtWindow[i].scale.y;
+					ExtShade[i].scale.x= ratioShade*ExtWindow[i].scale.z;
+					ExtShade[i].position.x = -this.solarCube.scale.x/2-(ExtShade[i].scale.x/2);
+					ExtShade[i].position.z = ExtWindow[i].scale.z/2+this.solarCube.scale.z/2;
+
+					leftShade[i].scale.x = ratioFin*ExtWindow[i].scale.y;
+					leftShade[i].scale.z = ExtWindow[i].scale.z;
+					leftShade[i].position.y = -(ExtWindow[i].scale.y/2);
+					leftShade[i].position.x = -this.solarCube.scale.x/2-(leftShade[i].scale.x/2);
+					leftShade[i].position.z = ExtWindow[i].position.z;
+
+					rightShade[i].scale.x = ratioFin*ExtWindow[i].scale.y;
+					rightShade[i].scale.z = ExtWindow[i].scale.z;
+					rightShade[i].position.y = (ExtWindow[i].scale.y/2);
+					rightShade[i].position.x = -this.solarCube.scale.x/2-(rightShade[i].scale.x/2);
+					rightShade[i].position.z = ExtWindow[i].position.z;
+					break;
+				default: break;
+  		}
+		}
+
+
     $('#Window_U_Value').slider(enable ? "enable" : "disable");
     $('#Window_SHGC').slider(enable ? "enable" : "disable");
   },
@@ -721,7 +800,6 @@ sz2=str(CDbl(BuildingHeight)-windowheadersize-Extwh)
 		var i=1;
     leftShade[i].scale.y= ui.value*ExtWindow[i].scale.x;
     leftShade[i].position.y = -this.solarCube.scale.y/2-(leftShade[i].scale.y/2);
-
   },
  
  handleFinR: function(evt, ui) {
